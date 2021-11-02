@@ -1,0 +1,164 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: "API Empleado"
+basePath: "/c3p"
+schemes:
+  - https
+paths:
+  "/v1/Portal/Empleado":
+    post:
+      tags:
+      - "Empleado"
+      operationId: postEmpleado
+      summary: Crea un Empleado
+      description: Crea un Empleado
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: X-RqUID
+          description: Identificador único del mensaje.
+          in: header
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 1
+        - name: ReqPostEmpleado
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ReqPostEmpleado'
+      responses:
+        '201':
+          description: creado
+          headers:
+            X-RqUID:
+              type: string
+              description: Identificador único del mensaje.
+        '206':
+          description: Error en la transacción
+          schema:
+            $ref: '#/definitions/Error'
+          headers:
+            X-RqUID:
+              type: string
+              description:  Identificador único del mensaje.
+  "/v1/Portal/Empleado/{Codigo}":
+    get:
+      tags:
+      - "Empleado"
+      operationId: getEmpleado
+      summary: Consultar un Empleado
+      description: Consultar un Empleado
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: X-RqUID
+          description: Identificador único del mensaje.
+          in: header
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 1
+        - name: Codigo
+          description: Identificador único del mensaje.
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: exitoso
+          schema:
+            $ref: '#/definitions/RespGetEmpleado'
+          headers:
+            X-RqUID:
+              type: string
+              description: Identificador único del mensaje.
+        '206':
+          description: Error en la transacción
+          schema:
+            $ref: '#/definitions/Error'
+          headers:
+            X-RqUID:
+              type: string
+              description: Identificador único del mensaje.
+  "/v1/Portal/Empleados":
+    get:
+      tags:
+      - "Empleado"
+      summary: Consultar lista de Empleados
+      description: Consultar lista de Empleados
+      operationId: getEmpleados
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: X-RqUID
+          description: Identificador único del mensaje.
+          in: header
+          required: true
+          type: string
+          maxLength: 36
+          minLength: 1
+      responses:
+        '200':
+          description: exitoso
+          schema:
+             type: "array"
+             items:
+              $ref: "#/definitions/RespGetEmpleado"
+          headers:
+            X-RqUID:
+              type: string
+              description: Identificador único del mensaje.
+        '206':
+          description: Error en la transacción
+          schema:
+            $ref: '#/definitions/Error'
+          headers:
+            X-RqUID:
+              type: string
+              description: Identificador único del mensaje.
+definitions:
+  ReqPostEmpleado:
+    type: object
+    properties:
+      Codigo:
+        type: string
+      Nombre:
+        type: string
+      Identificacion:
+        type: string
+      Rol:
+        type: string
+      Correo:
+        type: string
+      Telefono:
+        type: string
+  RespGetEmpleado:
+    type: object
+    properties:
+      Codigo:
+        type: string
+      Nombre:
+        type: string
+      Identificacion:
+        type: string
+      Rol:
+        type: string
+      Correo:
+        type: string
+      Telefono:
+        type: string
+  Error:
+    type: object
+    properties:
+      Codigo:
+        type: string
+      Mensaje:
+        type: string
