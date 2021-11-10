@@ -1,2 +1,9 @@
+spring:
+  application:
+    name: pica-employee
 server:
   port: 5002
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
