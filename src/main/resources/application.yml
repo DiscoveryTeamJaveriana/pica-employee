@@ -1,6 +1,8 @@
 spring:
   application:
     name: pica-employee
+  zipkin:
+    base-url: http://zipkin-server:9411/
 server:
   port: 5002
 eureka:
