@@ -3,6 +3,20 @@ spring:
     name: pica-employee
   zipkin:
     base-url: http://zipkin-server:9411/
+  datasource:
+    url: jdbc:postgresql://DiscoveryTeamPostgreSQL:10017/inspection
+    username: discoveryteam
+    password: discoveryteam
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: LocationHikariPool
+      connection-test-query: select 1
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
 server:
   port: 5002
 eureka:

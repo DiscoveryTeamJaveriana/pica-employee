@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -52,10 +52,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/Empleados")
-    public ResponseEntity< ArrayList<RespGetEmpleado>> getEmpleados(@RequestHeader(value=XRQUID) String xRqUID ) throws JsonProcessingException {
+    public ResponseEntity<List<RespGetEmpleado>> getEmpleados(@RequestHeader(value=XRQUID) String xRqUID ) throws JsonProcessingException {
         log.info("Get Employees for RqUID {}", xRqUID);
         EmployeeController.this.tracer.currentSpan().tag(RQUID,xRqUID);
-        ArrayList<RespGetEmpleado> response = employeeService.getEmpleados(xRqUID);
+        List<RespGetEmpleado> response = employeeService.getEmpleados(xRqUID);
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(response);
         EmployeeController.this.tracer.currentSpan().tag(RESPONSE,json);
