@@ -4,7 +4,7 @@ spring:
   zipkin:
     base-url: http://zipkin-server:9411/
   datasource:
-    url: jdbc:postgresql://DiscoveryTeamPostgreSQL:10017/inspection
+    url: jdbc:postgresql://DiscoveryTeamPostgreSQL:5432/inspection
     username: discoveryteam
     password: discoveryteam
     driver-class-name: org.postgresql.Driver
