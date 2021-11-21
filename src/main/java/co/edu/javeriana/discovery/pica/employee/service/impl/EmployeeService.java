@@ -25,16 +25,25 @@ public class EmployeeService implements IEmployeeService {
     public void postEmpleado(ReqPostEmpleado request, String rquid) {
 
         Employee employee = EmployeeMapper.mapReqPostEmpleadoToEmployee(request);
-        employeeRepository.save(employee);
+        try {
+            employeeRepository.save(employee);
+        }catch (Exception e) {
+            log.info("Error al crear empleado");
+            throw e;
+        }
 
     }
 
     @Override
     public List<RespGetEmpleado> getEmpleados(String rquid) {
-
-        return employeeRepository.findAll().stream()
-                .map(EmployeeMapper::mapEmployeeToRespGetEmpleado)
-                .collect(Collectors.toList());
+        try {
+            return employeeRepository.findAll().stream()
+                    .map(EmployeeMapper::mapEmployeeToRespGetEmpleado)
+                    .collect(Collectors.toList());
+        }catch (Exception e) {
+            log.info("Error al consultar empleados");
+            throw e;
+        }
     }
 
     @Override
